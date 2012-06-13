@@ -84,7 +84,10 @@
                 };
 
                 for(var variable in data)
-                    currentUrl = currentUrl.replace('${'+variable+'}', encodeURIComponent(data[variable]));
+                {
+                    var re = new RegExp('\\$\\{'+ variable + '\\}',"gi");
+                    currentUrl = currentUrl.replace(re, encodeURIComponent(data[variable]));
+                }
 
                 this.container.find(this.config.linkSelector + service).attr('href', currentUrl);
             }
