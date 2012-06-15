@@ -25,14 +25,15 @@
     // the plugin prototype
     JqShare.prototype = {
         defaults: {
-            linkSelector: '._link-share-',
-            urls : {
-                // ${url} url, ${title} title, ${image} media
-                facebook : 'https://www.facebook.com/sharer.php?u=${url}&t=${title}',
-                twitter  : 'http://twitter.com/home?status=${url}%20-%20${title}',
-                google   : 'https://plus.google.com/share?url=${url}',
-                pinterest: 'http://pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}'
-            }
+            linkSelector: '._link-share-'
+        },
+
+        services : {
+            // ${url} url, ${title} title, ${image} media
+            facebook : 'https://www.facebook.com/sharer.php?u=${url}&t=${title}',
+            twitter  : 'http://twitter.com/home?status=${url}%20-%20${title}',
+            google   : 'https://plus.google.com/share?url=${url}',
+            pinterest: 'http://pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}'
         },
 
         init: function(container) {
@@ -72,22 +73,23 @@
 
         update: function()
         {
-            for(var service in this.config.urls)
+            var service,
+                data,
+                variable;
+
+            for(service in this.services)
             {
                 currentUrl = this.config.urls[service];
 
-                var data =
+                data =
                 {
                     url : this.data['url-' + service] || this.data.url,
                     title : this.data['title-' + service] || this.data.title,
                     image : this.data['image-' + service] || this.data.image
                 };
 
-                for(var variable in data)
-                {
-                    var re = new RegExp('\\$\\{'+ variable + '\\}',"gi");
-                    currentUrl = currentUrl.replace(re, encodeURIComponent(data[variable]));
-                }
+                for(variable in data)
+                    currentUrl = currentUrl.replace(new RegExp('\\$\\{'+ variable + '\\}',"gi"), encodeURIComponent(data[variable]));
 
                 this.container.find(this.config.linkSelector + service).attr('href', currentUrl);
             }
