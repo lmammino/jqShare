@@ -79,7 +79,7 @@
 
             for(service in this.services)
             {
-                currentUrl = this.config.urls[service];
+                currentUrl = this.services[service];
 
                 data =
                 {
