@@ -18,8 +18,8 @@ Using jqShare is simple as using every other jQuery plugin. Speaking in code lan
 
     <div class="myShareDiv">
         <ul>
-            <li><a class="_link-share-facebook>Share on Facebook</a></li>
-            <li><a class="_link-share-twitter>Share on Twitter</a></li>
+            <li><a class="_link-share-facebook">Share on Facebook</a></li>
+            <li><a class="_link-share-twitter">Share on Twitter</a></li>
         </ul>
     </div>
 
@@ -50,7 +50,7 @@ Currently the supported services are:
   * [Google+](http://plus.google.com)
   * [Pinterest](http://www.pinterest.com)
 
-But you can simply add other services on the fly if needed.
+But you can simply [add other services on the fly](#adding-services-on-the-fly) if needed.
 
 ## Plugin options
 
