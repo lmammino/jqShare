@@ -54,12 +54,12 @@ But you can simply add other services on the fly if needed.
 
 ## Plugin options
 
-<To be written> sorry no time yet :(
+**To be written** sorry no time yet :(
 
 ## Overwrite data options for specific services
 
-<To be written> sorry no time yet :(
+**To be written** sorry no time yet :(
 
 ## Adding services on the fly
 
-<To be written> sorry no time yet :(
+**To be written** sorry no time yet :(
