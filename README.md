@@ -12,7 +12,7 @@ so go and take a look at the [code](http://jsbin.com/apasow/12/edit)
 
 ## First glimpse
 
-Using jqShare is simple as using every other jQuery plugin. Speaking in code language you have to:
+Using jqShare is as simple as using every other jQuery plugin. Speaking in code language you have to:
 
 ### 1. Prepare your html properly
 
@@ -24,7 +24,8 @@ Using jqShare is simple as using every other jQuery plugin. Speaking in code lan
     </div>
 
 As you can see you just have to create a container which holds a set of links classed with the convention `_link-share-serviceName`
- where _serviceName_ is the name of the social service on which you want to share.
+(obviously you can customize the class prefix if you don't like the default one) where _serviceName_ is the name of the
+social service on which you want to share.
 
 ### 2. Initialize the plugin on your container
 

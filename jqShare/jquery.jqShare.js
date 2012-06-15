@@ -15,10 +15,6 @@
         this.$elem = $(elem);
         this.options = options;
 
-        // This next line takes advantage of HTML5 data attributes
-        // to support customization of the plugin on a per-element
-        // basis. For example,
-        // <div class=item' data-plugin-options='{"message":"Goodbye World!"}'></div>
         this.metadata = this.$elem.data( 'plugin-options' );
     };
 
@@ -37,8 +33,6 @@
         },
 
         init: function(container) {
-            // Introduce defaults that can be extended either
-            // globally or using an object literal.
             this.container = container;
             this.config = $.extend({}, this.defaults, this.options, this.metadata);
             this.data = this.config.data || {
@@ -46,15 +40,6 @@
                 title : '',
                 image : ''
             };
-
-            // Sample usage:
-            // Set the message per instance:
-            // $('#elem').plugin({ message: 'Goodbye World!'});
-            // or
-            // var p = new JqShare(document.getElementById('elem'),
-            // { message: 'Goodbye World!'}).init()
-            // or, set the global default message:
-            // JqShare.defaults.message = 'Goodbye World!'
 
             this.update();
             return this;
@@ -75,7 +60,8 @@
         {
             var service,
                 data,
-                variable;
+                variable,
+                currentUrl;
 
             for(service in this.services)
             {
