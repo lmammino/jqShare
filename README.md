@@ -104,7 +104,31 @@ E.g.
 
 ## Useful methods for the jqShare instance
 
-**To be written** sorry no time yet :(
+If you retrieved the jqShare instance you can update all the links without re-initializing the plugin again. You can use
+the methods `setData` and `update`. Let's have a quick look on them:
+
+### setData
+
+Set data allows you to set new data to create the new share urls. Notice share links will not be automatically updated
+after calling setData, if you want to trigger an update you have to explicitly call the `update` method on the jqShare
+instance.
+
+    setData(data, merge);
+
+**Parameters**:
+
+  * `data`: an object structured as the `data` option used to initialize the plugin (you can add the same attributes: `url`, `title`, `image`, etc...)
+  * `merge`: a boolean value that indicates whether the new data is going to be merged with the existing one or not.
+  If this value is set to `true` the new attributes will be merged to existing ones (i.e. the will overwrite redeclared ones and
+  leaves unchanged the others). If the value is set to `false` the whole data object will be replaced with the new one.
+
+### update
+
+Used to effectively trigger the update of the dom elements after a `setData` call.
+
+    update()
+
+**No parameters**.
 
 ## Overwrite data options for specific services
 
