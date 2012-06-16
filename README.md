@@ -54,7 +54,7 @@ Currently the supported services are:
   * [Google+](http://plus.google.com)
   * [Pinterest](http://www.pinterest.com)
 
-But you can simply [add other services on the fly](#adding-services-on-the-fly-or-\(even\)-customize-existing-ones!) if needed.
+But you can simply [add other services on the fly](#adding-services-on-the-fly-or-even-customize-existing-ones) if needed.
 
 ## Plugin options
 
@@ -88,7 +88,19 @@ An object used to pass all the information about the link you want to make share
 
 ## Retrieving the jqShare instance
 
-**To be written** sorry no time yet :(
+Every time you call the jqShare plugin on some DOM element (that will be the jqShare container) the created jqShare instance
+is injected to the DOM element data parameters, so it would be pretty easy for you to retrieve it for further manipulation.
+
+E.g.
+
+    //define options (intentionally truncated)
+    var options = ... ;
+
+    //instantiate the plugin
+    $('.myContainer').jqShare(options);
+
+    //retrieve the jqShare instance
+    var jqShareInstance = $('.myContainer').data('jqShare');
 
 ## Useful methods for the jqShare instance
 
