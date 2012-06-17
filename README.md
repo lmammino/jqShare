@@ -132,8 +132,50 @@ Used to effectively trigger the update of the dom elements after a `setData` cal
 
 ## Overwrite data options for specific services
 
-**To be written** sorry no time yet :(
+Do you want to create a different title only for twitter on a different url only for facebook or pinterest? Yes you can!
+
+You can pass special attributers to the `data` object (while initializing the plugin or while changing the data wiht `setData`) to do so.
+Special attributes follow this convention `attributeName-serivce`. Check this example:
+
+    $('.myContainer').jqShare({
+        data:
+        {
+            url : 'http://www.site-i-want-to-share.com',
+            title: 'uh, Such an awesome website my friends!',
+            title-twitter: 'uh, Such an awesome website my friends! via @myTwitter #links #sharing #websites'
+        }
+    })
+
+This way you have a custom title that will be applied only to the twitter service creating an optimized tweet.
 
 ## Adding services on the fly or (even) customize existing ones!
 
-**To be written** sorry no time yet :(
+If you need more services than the default ones you can easily add them.
+Services definitions are stored inside the `JqShare.prototype.services`. This variable olds an object (organized as a
+key-value storage) where every service is defined by a link prototype such the following:
+
+    'http://pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}'
+
+The actual objects holds the following services:
+
+    services :
+    {
+        // ${url} url, ${title} title, ${image} media
+        facebook : 'https://www.facebook.com/sharer.php?u=${url}&t=${title}',
+        twitter  : 'http://twitter.com/home?status=${url}%20-%20${title}',
+        google   : 'https://plus.google.com/share?url=${url}',
+        pinterest: 'http://pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}'
+    },
+
+As you can see in the comment line each prototype can hold some placeholder like `${url}` or `${title}` that will be
+automatically replaced with the current instance values while using the plugin. So, to add new services you would just have
+to alter the services object as follows:
+
+    JqShare.prototype.services.tumblr = 'http://www.tumblr.com/share?v=3&u=${url}&t=${title}';
+
+As you imagined this allows you to have tumblr as new sharing service. Obviously you can even redefine existing ones by overwriting them.
+
+## License
+You are free to use this plugin both for commercial and non-commercial projects. However, if you plan to edit and redistribute the plugin you should give credit to the [developer](https://github.com/lmammino) by linking the [original github page of the project](https://github.com/lmammino/jqShare).
+
+### Thankyou for being interested! ;)

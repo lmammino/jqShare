@@ -7,10 +7,11 @@
  * @author Luciano Mammino <lmammino@oryzone.com>
  * @version 1.0
  */
+var JqShare = null;
 (function($)
 {
     // our plugin constructor
-    var JqShare = function( elem, options ){
+    JqShare = function( elem, options ){
         this.elem = elem;
         this.$elem = $(elem);
         this.options = options;
@@ -24,14 +25,6 @@
             linkSelector: '._link-share-'
         },
 
-        services : {
-            // ${url} url, ${title} title, ${image} media
-            facebook : 'https://www.facebook.com/sharer.php?u=${url}&t=${title}',
-            twitter  : 'http://twitter.com/home?status=${url}%20-%20${title}',
-            google   : 'https://plus.google.com/share?url=${url}',
-            pinterest: 'http://pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}'
-        },
-
         init: function(container) {
             this.container = container;
             this.config = $.extend({}, this.defaults, this.options, this.metadata);
@@ -42,6 +35,7 @@
             };
 
             this.update();
+
             return this;
         },
 
@@ -54,6 +48,8 @@
                 this.data = $.extend(this.data, data);
             else
                 this.data = data;
+
+            return this;
         },
 
         update: function()
@@ -79,15 +75,24 @@
 
                 this.container.find(this.config.linkSelector + service).attr('href', currentUrl);
             }
+
+            return this;
         }
     };
 
     JqShare.defaults = JqShare.prototype.defaults;
+
+    JqShare.prototype.services = {
+        // ${url} url, ${title} title, ${image} media
+        facebook : 'https://www.facebook.com/sharer.php?u=${url}&t=${title}',
+        twitter  : 'http://twitter.com/home?status=${url}%20-%20${title}',
+        google   : 'https://plus.google.com/share?url=${url}',
+        pinterest: 'http://pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}'
+    };
 
     $.fn.jqShare = function(options) {
         return this.each(function() {
             $(this).data('jqShare', new JqShare(this, options).init($(this)));
         });
     };
-
 })(jQuery);

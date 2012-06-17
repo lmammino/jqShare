@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<!--
+
+  Created using /
+  Source can be edited via /apasow/12/edit
+
+-->
+<head>
+<meta charset=utf-8 />
+<title>jqShare interactive demo</title>
+<!--[if IE]>
+  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+  <script src="../jqShare/jquery.jqShare.js"></script>
+<style>
+  article, aside, figure, footer, header, hgroup, 
+  menu, nav, section { display: block; }
+  #linkCreator, .sharedLink
+  {
+    border: 1px solid #cdcdcd;
+    margin: 10px 0 0 0;
+    padding: 10px;
+    width: 400px;
+  }
+  
+  .sharedLink
+  {
+    background: #fdfdfd;
+  }
+  
+  #linkCreator input[type='text'],
+  #linkCreator textarea
+  {
+    width: 100%;
+  }
+  
+  .sharelinks
+  {
+    border-top: 1px solid #eee;
+    padding: 10px 0 0 0;
+    text-align: right;
+  }
+  
+  .url, .shareLinks a
+  {
+    background-repeat: no-repeat;
+    display: inline-block;
+    padding: 0 0 0 20px;
+  }
+  
+  .sharelinks a
+  {
+      width: 1em;
+      height: 1em;
+  }
+  
+  .sharelinks a span
+  {
+    display: none; 
+  }
+  
+  .description
+  {
+    padding: 0 0 0 20px;
+  }
+  
+  footer
+  {
+    border-top: 1px solid #cdcdcd;
+    font-size: small;
+    margin: 30px 0 0 0;
+  }
+</style>
+</head>
+<body>
+  <div id="linkCreator">
+    <p>Insert the <strong>url</strong> and the <strong>description</strong> of the site you want to add, so click <strong>create</strong>.</p>
+    <input type="text" id="txtUrl" placeholder="Insert the url of your favourite website"/><br/>
+    <textarea id="txtDescription" placeholder="Optionally add a description"></textarea><br/>
+    <input type="button" id="btnCreate" value="create"/>
+  </div>
+  <div id="sharedLinks">
+    
+  </div>
+  <footer>
+    <p>This is a demo of <a href="https://github.com/lmammino/jqShare">jqShare</a>, a jQuery plugin  that ease the pain of creating share links for social sharing</p> 
+  </footer>
+<script>
+(function($){
+  
+  var template = '<div class="sharedLink">' +
+      '<p class="url" style="background-image:url(http://g.etfv.co/${url|encoded})"><a href="${url}">${url}</a></p>' +
+      '<p class="description">${description}</p>' +
+      '<p class="shareLinks"> Share: ' +
+        '<a href="#" class="_link-share-facebook" style="background-image:url(http://g.etfv.co/http%3a%2f%2ffacebook.com)"><span>Facebook</span></a>' +
+        '<a href="#" class="_link-share-twitter" style="background-image:url(http://g.etfv.co/http%3a%2f%2ftwitter.com)"><span>Twitter</span></a>' +
+        '<a href="#" class="_link-share-google" style="background-image:url(http://g.etfv.co/http%3a%2f%2fgoogle.com)"><span>Google</span></a>' +
+      '</p>' +
+    '</div>';
+  
+  $('#btnCreate').click(function(){
+    
+    var url = $('#txtUrl').val();
+    var url_encoded = encodeURIComponent(url);
+    var description = $('#txtDescription').val();
+    var code = template.replace(/\$\{url\}/gi, url)
+                       .replace(/\$\{url\|encoded\}/gi, url_encoded)
+                       .replace(/\$\{description\}/gi, description);
+    
+    var element = $(code).jqShare(
+    {
+      data : 
+      {
+        url : url, 
+        title: description
+      }
+    });
+    
+    element.css('display','none').prependTo('#sharedLinks').show('slow');
+    $('#txtUrl').val('');
+    $('#txtDescription').val('');
+    return false;
+  });
+})(jQuery);
+
+</script>
+</body>
+</html>
