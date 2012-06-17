@@ -156,7 +156,7 @@ key-value storage) where every service is defined by a link prototype such the f
 
     'http://pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}'
 
-The actual objects holds the following services:
+The actual configuration holds the following services:
 
     services :
     {
