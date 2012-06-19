@@ -39,28 +39,29 @@ var JqShare = null;
             return this;
         },
 
-        setData: function (data, merge) {
+        setData: function (data, merge) 
+        {
             
-            if (typeof merge === 'undefined') {
-                merge = false;
-            }
+            if (typeof merge === 'undefined')
+                merge = false;            
 
-            if (merge) {
+            if (merge)
                 this.data = $.extend(this.data, data);
-            } else {
+            else
                 this.data = data;
-            }
 
             return this;
         },
 
-        update: function () {
+        update: function () 
+        {
             var service,
                 data,
                 variable,
                 currentUrl;
 
-            for (service in this.services) {
+            for (service in this.services) 
+            {
                 
                 if (this.services.hasOwnProperty(service)) {
                     
@@ -72,9 +73,8 @@ var JqShare = null;
                         image : this.data['image-' + service] || this.data.image
                     };
     
-                    for (variable in data) {
-                        currentUrl = currentUrl.replace(new RegExp('\\$\\{'+ variable + '\\}',"gi"), encodeURIComponent(data[variable]));
-                    }
+                    for (variable in data)
+                        currentUrl = currentUrl.replace(new RegExp('\\$\\{'+ variable + '\\}',"gi"), encodeURIComponent(data[variable]));                
     
                     this.container.find(this.config.linkSelector + service).attr('href', currentUrl);
                 }
