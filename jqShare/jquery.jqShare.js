@@ -8,10 +8,10 @@
  * @version 1.0
  */
 var JqShare = null;
-(function($)
-{
+(function ($) {
+
     // our plugin constructor
-    JqShare = function( elem, options ){
+    JqShare = function ( elem, options ) {
         this.elem = elem;
         this.$elem = $(elem);
         this.options = options;
@@ -20,32 +20,37 @@ var JqShare = null;
     };
 
     // the plugin prototype
-    JqShare.prototype = {
-        defaults: {
+    JqShare.prototype =
+    {
+        defaults:
+        {
             linkSelector: '._link-share-',
-            buttonSelector: '._btn-share-'
+            data:
+            {
+                url : window.location.href || '',
+                title : $('title').text() || '',
+                image : $('img:first').attr('src') || ''
+            }
         },
 
-        init: function(container) {
+        init: function (container)
+        {
             this.container = container;
             this.config = $.extend({}, this.defaults, this.options, this.metadata);
-            this.data = this.config.data || {
-                url : '',
-                title : '',
-                image : ''
-            };
+            this.data = this.config.data;
 
             this.update();
 
             return this;
         },
 
-        setData: function(data, merge)
+        setData: function (data, merge) 
         {
-            if(typeof(merge) == 'undefined')
-                merge = false;
+            
+            if (typeof merge === 'undefined')
+                merge = false;            
 
-            if(merge)
+            if (merge)
                 this.data = $.extend(this.data, data);
             else
                 this.data = data;
@@ -53,28 +58,31 @@ var JqShare = null;
             return this;
         },
 
-        update: function()
+        update: function () 
         {
             var service,
                 data,
                 variable,
                 currentUrl;
 
-            for(service in this.services)
+            for (service in this.services) 
             {
-                currentUrl = this.services[service];
-
-                data =
-                {
-                    url : this.data['url-' + service] || this.data.url,
-                    title : this.data['title-' + service] || this.data.title,
-                    image : this.data['image-' + service] || this.data.image
-                };
-
-                for(variable in data)
-                    currentUrl = currentUrl.replace(new RegExp('\\$\\{'+ variable + '\\}',"gi"), encodeURIComponent(data[variable]));
-
-                this.container.find(this.config.linkSelector + service).attr('href', currentUrl);
+                
+                if (this.services.links.hasOwnProperty(service)) {
+                    
+                    currentUrl = this.services.links[service];
+                                
+                    data = {
+                        url : this.data['url-' + service] || this.data.url,
+                        title : this.data['title-' + service] || this.data.title,
+                        image : this.data['image-' + service] || this.data.image
+                    };
+    
+                    for (variable in data)
+                        currentUrl = currentUrl.replace(new RegExp('\\$\\{'+ variable + '\\}',"gi"), encodeURIComponent(data[variable]));                
+    
+                    this.container.find(this.config.linkSelector + service).attr('href', currentUrl);
+                }
             }
 
             return this;
@@ -83,8 +91,8 @@ var JqShare = null;
 
     JqShare.defaults = JqShare.prototype.defaults;
 
-    JqShare.prototype.services = {
-
+    JqShare.prototype.services =
+    {
         // ${url} url, ${title} title, ${image} media
 
         links :
@@ -101,8 +109,9 @@ var JqShare = null;
         }
     };
 
-    $.fn.jqShare = function(options) {
-        return this.each(function() {
+    $.fn.jqShare = function (options)
+    {
+        return this.each(function () {
             $(this).data('jqShare', new JqShare(this, options).init($(this)));
         });
     };
