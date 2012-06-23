@@ -22,7 +22,8 @@ var JqShare = null;
     // the plugin prototype
     JqShare.prototype = {
         defaults: {
-            linkSelector: '._link-share-'
+            linkSelector: '._link-share-',
+            buttonSelector: '._btn-share-'
         },
 
         init: function(container) {
@@ -83,11 +84,21 @@ var JqShare = null;
     JqShare.defaults = JqShare.prototype.defaults;
 
     JqShare.prototype.services = {
+
         // ${url} url, ${title} title, ${image} media
-        facebook : 'https://www.facebook.com/sharer.php?u=${url}&t=${title}',
-        twitter  : 'http://twitter.com/home?status=${url}%20-%20${title}',
-        google   : 'https://plus.google.com/share?url=${url}',
-        pinterest: 'http://pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}'
+
+        links :
+        {
+            facebook : 'https://www.facebook.com/sharer.php?u=${url}&t=${title}',
+            twitter  : 'http://twitter.com/home?status=${url}%20-%20${title}',
+            google   : 'https://plus.google.com/share?url=${url}',
+            pinterest: 'http://pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}'
+        },
+
+        buttons :
+        {
+            twitter : '<a href="https://twitter.com/share" class="twitter-share-button" data-via="loige">Tweet</a><script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>'
+        }
     };
 
     $.fn.jqShare = function(options) {

@@ -42,7 +42,7 @@ with the information about the website you want to make shareable: the _url_ and
 
 This will _automagically_ turns your share links into fully-functionally clickable links!
 
-Simple isn't it?
+Simple, isn't it?
 
 
 ## Supported services
