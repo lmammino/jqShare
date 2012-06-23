@@ -70,12 +70,12 @@ a prefix, the service name will be appended to this selector (e.g. `"._link-shar
 
 ### data
 
-Default value:
+Default values:
 
     {
-        url     : '',
-        title   : '',
-        image   : ''
+        url     : <current page url>,
+        title   : <current page title>,
+        image   : <first image found on the current page or `null`>
     }
 
 An object used to pass all the information about the link you want to make shareable. Every sub-parameter is almost self-explanatory:

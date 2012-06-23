@@ -9,6 +9,7 @@
  */
 var JqShare = null;
 (function ($) {
+
     // our plugin constructor
     JqShare = function ( elem, options ) {
         this.elem = elem;
@@ -19,17 +20,21 @@ var JqShare = null;
     };
 
     // the plugin prototype
-    JqShare.prototype = {
-        defaults: {
+    JqShare.prototype =
+    {
+        defaults:
+        {
             linkSelector: '._link-share-',
-            data: {
+            data:
+            {
                 url : window.location.href || '',
                 title : $('title').text() || '',
                 image : $('img:first').attr('src') || ''
             }
         },
 
-        init: function (container) {
+        init: function (container)
+        {
             this.container = container;
             this.config = $.extend({}, this.defaults, this.options, this.metadata);
             this.data = this.config.data;
@@ -86,7 +91,8 @@ var JqShare = null;
 
     JqShare.defaults = JqShare.prototype.defaults;
 
-    JqShare.prototype.services = {
+    JqShare.prototype.services =
+    {
         // ${url} url, ${title} title, ${image} media
         facebook : 'https://www.facebook.com/sharer.php?u=${url}&t=${title}',
         twitter  : 'http://twitter.com/home?status=${url}%20-%20${title}',
@@ -94,9 +100,11 @@ var JqShare = null;
         pinterest: 'http://pinterest.com/pin/create/button/?url=${url}&media=${image}&description=${title}'
     };
 
-    $.fn.jqShare = function (options) {
+    $.fn.jqShare = function (options)
+    {
         return this.each(function () {
             $(this).data('jqShare', new JqShare(this, options).init($(this)));
         });
     };
+
 })(jQuery);
